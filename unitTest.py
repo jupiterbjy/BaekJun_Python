@@ -3,7 +3,7 @@ import sys
 from contextlib import contextmanager
 from io import StringIO
 
-from _14681 import func
+from _2884 import func
 
 
 @contextmanager
@@ -22,18 +22,28 @@ def printCaptured():
 class TestBase(unittest.TestCase):
 
     def testCase1(self):
-        inputs = 9, -13
-        expect = 4
+        inputs = '10 10'
+        expect = '9 25'
 
         with printCaptured() as (out, err):
-            func(*inputs)
+            func(*inputs.split())
 
         output = out.getvalue().strip()
         self.assertEqual(str(expect), output)
 
     def testCase2(self):
-        inputs = 12, 5
-        expect = 1
+        inputs = '0 30'
+        expect = '23 45'
+
+        with printCaptured() as (out, err):
+            func(*inputs.split())
+
+        output = out.getvalue().strip()
+        self.assertEqual(str(expect), output)
+
+    def testCase3(self):
+        inputs = 23, 40
+        expect = '22 55'
 
         with printCaptured() as (out, err):
             func(*inputs)
